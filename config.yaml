@@ -1,0 +1,80 @@
+dataset:
+  name: "bot-iot"
+  kaggle_slug: "majedjaber/bot-iot-all-features-5-sample"
+  raw_path: "data/raw/"
+  processed_path: "data/processed/"
+  split:
+    train: 0.70
+    val: 0.15
+    test: 0.15
+  random_seed: 42
+  target_column: "attack"
+  label_column: "category"
+
+preprocessing:
+  scaling_method: "minmax"  # Paper 1 uses Min-Max normalization
+  smote: true
+  pca_components: null  # Set to integer to enable PCA
+
+model:
+  lstm_cnn:  # Paper 1 - Hybrid LSTM-CNN
+    lstm_layers: 3
+    lstm_units: 256
+    lstm_activation: "tanh"
+    cnn_filters: [64, 128, 256]
+    kernel_size: 3
+    pool_size: 2
+    dropout: 0.3
+    l2_reg: 0.001
+    dense_units: 128
+    output_activation: "sigmoid"
+    optimizer: "adam"
+    learning_rate: 0.0005
+    epochs: 50
+    batch_size: 128
+    loss: "binary_crossentropy"
+    early_stopping_patience: 5
+
+  baselines:  # Paper 1 comparison models (Table 4)
+    cnn:
+      layers: 2
+      filters: [64, 128]
+      kernel_size: 3
+      dropout: 0.3
+      learning_rate: 0.001
+      epochs: 50
+      batch_size: 128
+    rnn:
+      layers: 2
+      units: 128
+      dropout: 0.3
+      learning_rate: 0.001
+      epochs: 50
+      batch_size: 128
+    lstm:
+      layers: 2
+      units: 128
+      dropout: 0.3
+      learning_rate: 0.0005
+      epochs: 50
+      batch_size: 128
+    bilstm:
+      layers: 2
+      units: 128
+      dropout: 0.3
+      learning_rate: 0.0005
+      epochs: 50
+      batch_size: 128
+    gru:
+      layers: 2
+      units: 128
+      dropout: 0.2
+      learning_rate: 0.0005
+      epochs: 50
+      batch_size: 128
+
+results:
+  figures_path: "results/figures/"
+  tables_path: "results/tables/"
+  models_path: "results/models/"
+  logs_path: "results/logs/"
