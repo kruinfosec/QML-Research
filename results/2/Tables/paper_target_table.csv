@@ -1,0 +1,7 @@
+Model,Paper Accuracy (%),Paper Precision (%),Paper Recall (%),Paper F1-Score (%),Paper FPR (%)
+LSTM-CNN (Hybrid),99.87,99.89,99.85,99.87,0.13
+CNN,97.45,,,,2.38
+RNN,95.78,,,,
+LSTM,98.34,,,,1.58
+BiLSTM,98.92,,,,
+GRU,97.89,,,,2.05
